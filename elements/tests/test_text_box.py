@@ -13,7 +13,7 @@ def test_submit_form(py):
 # refactor
 
 def test_user1(elements, py):
-    elements.text_box.go_to_demoqa()
+    elements.text_box.go_to_demoqa_textbox()
     elements.text_box.type_user_name('kody1')
     elements.text_box.type_user_email('kody1@foo.com')
     elements.text_box.get_current_address()
@@ -23,7 +23,7 @@ def test_user1(elements, py):
 
 
 def test_user2(elements, py):
-    elements.text_box.go_to_demoqa()
+    elements.text_box.go_to_demoqa_textbox()
     elements.text_box.type_user_name('kody3')
     elements.text_box.type_user_email('kody1@foo.com')
     elements.text_box.get_current_address()

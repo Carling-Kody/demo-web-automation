@@ -6,7 +6,7 @@ class TextBox:
     def __init__(self, py: Pylenium):
         self.py = py
 
-    def go_to_demoqa(self):
+    def go_to_demoqa_textbox(self):
         self.py.visit('https://demoqa.com/text-box')
 
     def type_user_name(self, user_name):
