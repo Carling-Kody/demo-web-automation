@@ -21,7 +21,7 @@ def test_user1(elements, py):
     elements.text_box.submit_form()
     assert py.get('p[id="name"]').should().contain_text('kody1')
 
-
+Ω
 def test_user2(elements, py):
     elements.text_box.go_to_demoqa_textbox()
     elements.text_box.type_user_name('kody3')
