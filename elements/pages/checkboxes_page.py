@@ -17,17 +17,17 @@ class Checkboxes:
 
     def get_checkbox_titles(self):
         labels = []
-        title = self.py.find("span[class ='rct-title']")
-        for i in title:
-            labels.append(i.text().lower())
+        titles = self.py.find("span[class ='rct-title']")
+        for title in titles:
+            labels.append(title.text().lower())
         return labels
 
     def checkbox_json(self):
         label_list = self.get_checkbox_titles()
         checkbox_dictionary = {}
         count = 1
-        for item in label_list:
-            checkbox_dictionary[f"{item}"] = count
+        for label in label_list:
+            checkbox_dictionary[f"{label}"] = count
             count += 1
         return checkbox_dictionary
 
