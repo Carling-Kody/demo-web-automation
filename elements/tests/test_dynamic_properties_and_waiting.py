@@ -20,7 +20,7 @@ def test_element_enabled_after_5_seconds(elements, py):
     button = py.get('#enableAfter')
    # assert button.should().not_have_attr('disabled')
     assert py.get('#enableAfter').should().not_have_attr('disabled')
-   #  assert py.wait().until(lambda _: button.is_enabled())
+    assert py.wait().until(lambda _: button.is_enabled())
 
 
 def test_element_changes_text_color_to_red(elements, py):
