@@ -1,6 +1,12 @@
 # Created by kodycarling at 9/10/20
-Feature: # Enter feature name here
-  # Enter feature description here
+Feature: Menu Widget
+  Menu Widget at https://demoqa.com/accordian
 
-  Scenario: # Enter scenario name here
-    # Enter steps here
+  Scenario: Hovering over Menu items
+    When hovering over menu items
+    Then color changes from light green to dark green
+
+
+  Scenario: Hovering on Main Item 2
+    When hovering over "Main Item 2"
+    Then sub items are present
