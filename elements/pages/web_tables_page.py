@@ -3,8 +3,10 @@ from typing import List
 from pylenium import Pylenium
 from pylenium.element import Element
 
+from elements.models.user import User
 
-class Webtable:
+
+class WebTable:
 
     def __init__(self, py: Pylenium):
         self.py = py
@@ -19,12 +21,26 @@ class Webtable:
     DEPARTMENT = "#department"
     SUBMIT_NEW_RECORD_BUTTON = "#submit"
     REGISTRATION_FORM_CLOSE = ".close"
-    SEARCH_BOX ="#searchBox"
+    SEARCH_BOX = "#searchBox"
 
     # Actions
 
-    def go_to_web_table_page(self):
+    table_headers = {
+        'First Name': 1,
+        'Last Name': 2,
+        'Age': 3,
+        'Email': 4,
+        'Salary': 5,
+        'Department': 6
+    }
+
+    def go_to_web_table_page(self) -> 'WebTable':
         self.py.visit('https://demoqa.com/webtables')
+        return self
+
+    def get_column_cells_by_name(self, column_name) -> List[Element]:
+        header = self.table_headers[column_name]
+        return self.py.findx(f"//div[@role='rowgroup']/div//div[{header}]")
 
     def click_add_new_record_button(self):
         self.py.get(self.ADD_NEW_RECORD).click()
@@ -93,12 +109,36 @@ class Webtable:
     def search_for_user(self, text: str):
         self.py.get(self.SEARCH_BOX).type(text)
 
-    def get_filtered_rows_by_email(self, rows, email) -> List[Element]:
+    def get_populated_emails(self) -> List[str]:
+        """ Gets a list of all populated emails as strings """
+        email_cells = self.get_column_cells_by_name('Email')
+        return [cell.text() for cell in email_cells if cell.text() != ' ']
+
+
+    @staticmethod
+    def get_filtered_rows_by_email(rows, email) -> List[Element]:
         return [row for row in rows if email in row.text()]
+    # for row in rows:
+    #   if email in row.text():
+    #        filtered_rows.append(row)
 
+    def get_user_by_email(self, email) -> User:
+        users = self.get_all_users()
+        return next(user for user in users if user.email == email)
 
-
-
-
-
-
+    def get_all_users(self) -> List[User]:
+        users = list()
+        rows = self.py.find("[role='rowgroup']")
+        for row in rows:
+            cells = self.py.find('.rt-td')
+            first_name = cells[0].text()
+            last_name = cells[1].text()
+            age = int(cells[2].text())
+            salary = int(cells[3].text())
+            department = cells[4].text()
+            users.append(User(first_name=first_name,
+                              last_name=last_name,
+                              age=age,
+                              salary=salary,
+                              department=department))
+        return users

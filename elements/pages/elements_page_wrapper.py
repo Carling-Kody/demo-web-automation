@@ -4,7 +4,7 @@ from elements.pages.text_box_page import TextBox
 from elements.pages.radio_button_page import RadioButton
 from elements.pages.checkboxes_page import Checkboxes
 from elements.pages.dynamic_properties_page import DynamicProperties
-from elements.pages.web_tables_page import Webtable
+from elements.pages.web_tables_page import WebTable
 
 
 class ElementPages:
@@ -13,7 +13,7 @@ class ElementPages:
         self.radio_button = RadioButton(py)
         self.checkboxes = Checkboxes(py)
         self.dynamic_properties = DynamicProperties(py)
-        self.web_page_table = Webtable(py)
+        self.web_page_table = WebTable(py)
 
 
 

@@ -1,4 +1,5 @@
 
+
 def test_add_new_record_blank(elements, py):
     elements.web_page_table.go_to_web_table_page()
     elements.web_page_table.click_add_new_record_button()
@@ -57,3 +58,10 @@ def test_filter_user_by_email(elements, py):
     #        filtered_rows.append(row)
     filtered_rows = elements.web_page_table.get_filtered_rows_by_email(rows, email)
     assert len(filtered_rows) == 1
+
+
+def test_emails_in_table_are_unique(py, elements):
+    elements.web_page_table.go_to_web_table_page()
+    populated_emails = elements.web_page_table.get_populated_emails()
+    unique_emails = set(populated_emails)
+    assert len(unique_emails) == len(populated_emails)
