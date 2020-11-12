@@ -1,4 +1,7 @@
+from typing import List
+
 from pylenium import Pylenium
+from pylenium.element import Element
 
 
 class Webtable:
@@ -16,6 +19,7 @@ class Webtable:
     DEPARTMENT = "#department"
     SUBMIT_NEW_RECORD_BUTTON = "#submit"
     REGISTRATION_FORM_CLOSE = ".close"
+    SEARCH_BOX ="#searchBox"
 
     # Actions
 
@@ -85,6 +89,15 @@ class Webtable:
             self.type_salary(salary)
             self.type_department(department)
             self.click_submit_new_record_button()
+
+    def search_for_user(self, text: str):
+        self.py.get(self.SEARCH_BOX).type(text)
+
+    def get_filtered_rows_by_email(self, rows, email) -> List[Element]:
+        return [row for row in rows if email in row.text()]
+
+
+
 
 
 

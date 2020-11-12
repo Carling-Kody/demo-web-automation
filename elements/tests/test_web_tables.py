@@ -40,3 +40,20 @@ def test_add_new_record_blank(elements, py):
 
     assert py.get(".rt-tbody").contains(check_name)
 
+
+def test_filter_user_by_email(elements, py):
+    # Arrange
+    email = 'cierra@example.com'
+    elements.web_page_table.go_to_web_table_page()
+
+    # Act
+    elements.web_page_table.search_for_user(email)
+    rows = py.find("[role='rowgroup']")
+
+    # Assert
+    # Filtered_rows=list()
+    # for row in rows:
+    #   if email in row.text():
+    #        filtered_rows.append(row)
+    filtered_rows = elements.web_page_table.get_filtered_rows_by_email(rows, email)
+    assert len(filtered_rows) == 1
