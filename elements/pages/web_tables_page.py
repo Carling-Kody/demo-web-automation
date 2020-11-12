@@ -114,7 +114,6 @@ class WebTable:
         email_cells = self.get_column_cells_by_name('Email')
         return [cell.text() for cell in email_cells if cell.text() != ' ']
 
-
     @staticmethod
     def get_filtered_rows_by_email(rows, email) -> List[Element]:
         return [row for row in rows if email in row.text()]
